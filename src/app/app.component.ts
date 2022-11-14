@@ -10,6 +10,7 @@ export class AppComponent {
   playing = false;
   private howl: Howl;
   task = [];
+  viewerInstance: any;
   constructor() {
     Howler.autoUnlock = true;
     Howler.volume(1.0);
@@ -37,5 +38,23 @@ export class AppComponent {
     };
 
     runLoop();
+  }
+
+  togglePDF(): void {
+    if (this.viewerInstance) {
+      PSPDFKit.unload(this.viewerInstance)
+      delete this.viewerInstance;
+      return;
+    }
+
+    PSPDFKit.load({
+      // Use the assets directory URL as a base URL. PSPDFKit will download its library assets from here.
+      container: "#pspdfkit-container",
+      document: 'assets/file.pdf',
+    }).then(instance => {
+      // how to load a custom page
+      // instance.setViewState(instance.viewState.set('currentPageIndex', 2));
+      this.viewerInstance = instance;
+    });
   }
 }

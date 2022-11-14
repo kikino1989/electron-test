@@ -28,10 +28,15 @@
                 "glob": "**/*.svg",
                 "input": "node_modules/ionicons/dist/ionicons/svg",
                 "output": "./svg"
+              },
+              {
+                "glob": "**/*",
+                "input": "./node_modules/pspdfkit/dist/pspdfkit-lib/",
+                "output": "./pspdfkit-lib/"
               }
             ],
             "styles": ["src/theme/variables.scss", "src/global.scss"],
-            "scripts": [],
+            "scripts": ["./node_modules/pspdfkit/dist/pspdfkit.js"],
             "aot": false,
             "vendorChunk": true,
             "extractLicenses": false,
