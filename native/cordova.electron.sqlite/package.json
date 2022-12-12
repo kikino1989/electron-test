@@ -1,0 +1,17 @@
+{
+  "name": "cordova-electron-sqlite",
+  "version": "0.0.1",
+  "description": "sqlite native code",
+  "cordova": {
+    "id": "cordova-electron-sqlite",
+    "platforms": [
+      "electron"
+    ]
+  },
+  "keywords": [
+    "ecosystem:cordova",
+    "cordova-electron"
+  ],
+  "author": "Enrique Gonzalez",
+  "license": "ISC"
+}
