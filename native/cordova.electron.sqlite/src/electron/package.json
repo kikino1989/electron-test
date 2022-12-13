@@ -1,0 +1,11 @@
+{
+  "name": "cordova.electron.sqlite.js",
+  "version": "0.0.1",
+  "main": "CordovaElectronSqlite.js",
+  "cordova": {
+    "serviceName": "CordovaElectronSqlite"
+  },
+  "dependencies": {
+    "sqlite3": "^5.1.2"
+  }
+}

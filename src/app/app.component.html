@@ -1,17 +1,23 @@
 <ion-app>
     <ion-content>
-      <ion-button (click)="toggleSound()">{{ playing ? 'STOP' : 'PLAY' }}</ion-button>
-      <ion-button (click)="togglePDF()">{{ viewerInstance ? 'VIEW' : 'CLOSE' }} PDF</ion-button>
-      <div class="pdf-viewer">
-        <div id="pspdfkit-container" style="width: 100%; height: 100vh"></div>
-      </div>
-
-      <!-- <ion-list id="labels-list">
+      <form [formGroup]="form" (ngSubmit)="submit()">
+        <input formControlName="label" required/>
+        <ion-button type="submit">submit</ion-button>
+      </form>
+      <ion-list id="labels-list">
         <ion-list-header>Tasks</ion-list-header>
 
         <ion-item *ngFor="let task of tasks" lines="none">
-          <ion-label>{{ task }}</ion-label>
+          <ion-label>{{ task.label }}</ion-label>
+          <ion-button (click)="delete(task.id)">delete</ion-button>
         </ion-item>
-      </ion-list> -->
+      </ion-list>
+      <br />
+
+      <ion-button (click)="toggleSound()">{{ playing ? 'STOP' : 'PLAY' }}</ion-button>
+      <ion-button (click)="togglePDF()">{{ !viewerInstance ? 'VIEW' : 'CLOSE' }} PDF</ion-button>
+      <div class="pdf-viewer">
+        <div id="pspdfkit-container" style="width: 100%; height: 100vh"></div>
+      </div>
     </ion-content>
 </ion-app>
