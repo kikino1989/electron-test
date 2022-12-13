@@ -40,7 +40,7 @@ export class AppComponent {
   ngOnInit() {
     this.platform.ready().then(() => {
       return this.sqlite.create({
-        name: 'data/testdb',
+        name: 'testdb',
       }).then((db: SQLiteObject) => {
         this.database = db;
         return db.executeSql(`CREATE TABLE IF NOT EXISTS todo (
