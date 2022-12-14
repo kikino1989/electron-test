@@ -1,0 +1,8 @@
+{
+    "electron": {
+        "windows": {
+            "package": ["appx"],
+            "arch": ["ia32", "x64", "arm64"]
+        }
+    }
+}

@@ -12,7 +12,8 @@
     "e2e": "ng e2e",
     "electron": "./node_modules/electron/cli.js",
     "start-electron": "ionic build && cordova run electron --nobuild",
-    "build-electron": "ionic build --prod && cordova build electron --release"
+    "build-electron": "set npm_config_arch=ia32 && ionic build --prod && cordova build electron --release",
+    "build-electron-arm":"set npm_config_arch=arm64 && ionic build --prod && cordova build electron --release"
   },
   "private": true,
   "dependencies": {
