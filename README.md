@@ -28,11 +28,13 @@ If done successfully, the command prompt should print something similar to this 
 ### resources
 https://cordova.apache.org/docs/en/10.x/guide/platforms/electron/
 https://www.electronjs.org/docs/latest/tutorial/windows-arm
+https://github.com/apache/cordova-electron/issues/209
 
 
 ### TroubleShooting building issue
 * Make sure that the "VSINSTALLDIR" environment variable has a trailing '\'. For instance: "C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\"
 * Make sure C:\Users\{user}\AppData\Local\node-gyp\Cache\14.18.1\arm64 is not empty. If so, download the node.lib library from https://artifacts.electronjs.org/headers/{node-version}/win-arm64/node.lib
 
-### signing the windows app
-https://interactiveknowledge.com/insights/how-code-sign-electron-app-windows
+### How to sign the individual packages
+cd "C:\Program Files (x86)\Windows Kits\10\bin\10.0.15063.0\x64"
+./signtool sign /n "certificate store name" /tr http://timestamp.digicert.com /td sha256 /fd sha256 /a /v "C:\path\to\.appx"

@@ -6,6 +6,6 @@
     "serviceName": "CordovaElectronSqlite"
   },
   "dependencies": {
-    "@vscode/sqlite3": "^5.1.2-vscode"
+    "sqlite3": "^5.1.2"
   }
 }
