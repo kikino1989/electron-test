@@ -1,8 +1,12 @@
 const sqlite3 = require('sqlite3').verbose();
+const electron = require('electron');
+const path = require('path');
 
 const dbmap = {};
 
 const closed_dbmap = {};
+
+const userDataPath = (electron.app || electron.remote.app).getPath('userData');
 
 
 function openDatabase(options) {
@@ -30,7 +34,7 @@ function openDatabase(options) {
   
     return new Promise((resolve, reject) => {
       try {
-        dbmap[name] = new sqlite3.Database(name, e => {
+        dbmap[name] = new sqlite3.Database(path.join(userDataPath, name), e => {
           if (!!e) {
             return reject(e);
           }

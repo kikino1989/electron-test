@@ -12,7 +12,8 @@
     "e2e": "ng e2e",
     "electron": "./node_modules/electron/cli.js",
     "start-electron": "ionic build && cordova run electron --nobuild",
-    "build-electron": "ionic build --prod && cordova build electron --release"
+    "build-electron": "ionic build --prod && cordova build electron --release",
+    "build-electron-debug": "ionic build && cordova build electron --debug"
   },
   "private": true,
   "dependencies": {
