@@ -30,6 +30,7 @@ https://cordova.apache.org/docs/en/10.x/guide/platforms/electron/
 https://www.electronjs.org/docs/latest/tutorial/windows-arm
 https://github.com/apache/cordova-electron/issues/209
 https://cameronnokes.com/blog/how-to-store-user-data-in-electron/
+https://learn.microsoft.com/en-us/windows/msix/packaging-tool/bundle-msix-packages
 
 
 ### TroubleShooting building issue
