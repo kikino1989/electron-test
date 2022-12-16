@@ -103,6 +103,9 @@ export class AppComponent {
   }
 
   submit() {
+    if (!this.form.valid) {
+        return;
+    }
     this.database.executeSql('INSERT INTO todo (label) VALUES (?)', [this.form.value.label]).then(() => this.loadTasks());
   }
 
