@@ -3,6 +3,7 @@
       <form [formGroup]="form" (ngSubmit)="submit()">
         <input formControlName="label" required/>
         <ion-button type="submit">submit</ion-button>
+        <p *ngIf="form?.dirty && form?.controls?.label?.errors"style="color: red;">Label is required.</p>
       </form>
       <ion-list id="labels-list">
         <ion-list-header>Tasks</ion-list-header>
