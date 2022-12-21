@@ -57,6 +57,16 @@ https://learn.microsoft.com/en-us/windows/msix/packaging-tool/bundle-msix-packag
 * Make sure that the "VSINSTALLDIR" environment variable has a trailing '\'. For instance: "C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\"
 * Make sure C:\Users\{user}\AppData\Local\node-gyp\Cache\14.18.1\arm64 is not empty. If so, download the node.lib library from https://artifacts.electronjs.org/headers/{node-version}/win-arm64/node.lib
 
-### How to sign the individual packages
+### How to sign the individual packages or .appxbundle
 cd "C:\Program Files (x86)\Windows Kits\10\bin\10.0.15063.0\x64"
-./signtool sign /n "certificate store name" /tr http://timestamp.digicert.com /td sha256 /fd sha256 /a /v "C:\path\to\.appx"
+./signtool sign /n "certificate store name" /tr http://timestamp.digicert.com /td sha256 /fd sha256 /a /v "C:\path\to\{.appx|.appxbundle}"
+
+### Bundling the .appx packages into a single bundle
+* cd C:\Program Files (x86)\Windows Kits\10\bin\10.0.17763.0\x86
+* ./makeappx.exe unpack /p "path\to\arm64.appx" /d "path\to\where\to\unpack\.appx"
+* Change the minVersion and maxVersionTested values to "10.0.14316.0"
+* Delete the old .appx for arm
+* ./makeappx.exe pack /d "path\to\where\the\appx\was\unpacked" /p "path\to\new\arm64.appx"
+* makeappx.exe bundle /d "path\to\folder\containing\.appx" /p "C:\path\to\output\bundle.appxbundle"
+If everything went well it should show:
+    Bundle creation succeeded.
