@@ -5,18 +5,17 @@
 * PowerShell version 3 or higher
 * Visual Studio 2017, it might work with the latest version as well.
 
-### run
+### Environment set up
 * npm i
 * ionic cordova prepare
 * cd C:\Program Files (x86)\Microsoft Visual Studio\Installer
-* vs_installer.exe modify --installPath "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community" --passive --add Microsoft.VisualStudio.Workload.NativeDesktop --add Microsoft.VisualStudio.COmponent.VC.ATLMFC --add Microsoft.VisualStudio.Component.VC.Tools.ARM64 --add Microsoft.VisualStudio.Component.VC.MFC.ARM64 --includeRecommended
 
-### Creating a cross-compilation command prompt
-Setting npm_config_arch=arm64 in the environment creates the correct arm64 .obj files, but the standard Developer Command Prompt for VS 2017 will use the x64 linker. To fix this:
-
-Duplicate the x64_x86 Cross Tools Command Prompt for VS 2017 shortcut (e.g. by locating it in the start menu, right clicking, selecting Open File Location, copying and pasting) to somewhere convenient.
-Right click the new shortcut and choose Properties.
-Change the Target field to read vcvarsamd64_arm64.bat at the end instead of vcvarsamd64_x86.bat.
+### Arm Cross-compilation set up
+* C:\Program Files (x86)\Microsoft Visual Studio\Installer\vs_installer.exe modify --installPath "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community" --passive --add Microsoft.VisualStudio.Workload.NativeDesktop --add Microsoft.VisualStudio.COmponent.VC.ATLMFC --add Microsoft.VisualStudio.Component.VC.Tools.ARM64 --add Microsoft.VisualStudio.Component.VC.MFC.ARM64 --includeRecommended
+* copy "C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\Common7\IDE\VC\VCTargets\Platforms\ARM" "C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\Common7\IDE\VC\VCTargets\Platforms\arm64" 
+* copy "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Visual Studio 2017\Visual Studio Tools\VC\x64_x86 Cross Tools Command Prompt for VS 2017" "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Visual Studio 2017\Visual Studio Tools\VC\x64_arm64 Cross Tools Command Prompt for VS 2017"
+* Right click the "x64_arm64 Cross Tools Command Prompt for VS 2017" and choose Properties.
+* Change the Target field to read vcvarsamd64_arm64.bat at the end instead of vcvarsamd64_x86.bat.
 If done successfully, the command prompt should print something similar to this on startup:
 
 **********************************************************************
@@ -24,6 +23,27 @@ If done successfully, the command prompt should print something similar to this 
 ** Copyright (c) 2017 Microsoft Corporation
 **********************************************************************
 [vcvarsall.bat] Environment initialized for: 'x64_arm64'
+
+### Building
+* Buidling the project requires to be the ionic project first by running:
+    ionic build --prod
+* After the ionic build finishes, than we build the cordova-electron project with:
+    cordova build electron --release|debug
+* There are shortcut scripts in the package.json for all of this:
+    npm run start-electron          <- build the ionic project and run it inside electron
+    npm run build-electron          <- create electron release builds
+    npm run build-electron-debug    <- create electron debug builds.
+
+### Building for arm
+* Change the "arch" node in the build.json file to "arm64"
+* Delete the node_modules folder in the project
+* Open the cross-compilation prompt by clicing on "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Visual Studio 2017\Visual Studio Tools\VC\x64_arm64 Cross Tools Command Prompt for VS 2017"
+* Navigate to the project directory and run:
+    set npm_config_arch=arm64
+* Install of the dependencies again to make sure that the proper binaries for arm64 are downloaded:
+    npm install
+* After the node_moduels folder has recreated successfully:
+    npm run build-electron
 
 ### resources
 https://cordova.apache.org/docs/en/10.x/guide/platforms/electron/
